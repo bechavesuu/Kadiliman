@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html data-bs-theme="light" lang="en" data-bss-forced-theme="light">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>PC Top-up</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Titillium+Web:400,600,700">
+
+<style>
+   body {
+        background: radial-gradient(#1a1a1a 0%, #000000 100%);
+        color: white;
+        height: 100%;
+        margin: 0;
+        padding-top: 67px;
+    }
+    .navbar-custom {
+        background-color: #000 !important;
+        border-bottom: 1px solid #ffffff;
+        position: fixed; /* Change from relative to fixed */
+        top: 0; /* Position at the top of the viewport */
+        width: 100%; /* Make it full width */
+        z-index: 1030; /* Higher z-index to ensure it stays above other content */
+    }
+      
+      .navbar-custom .navbar-brand {
+        margin-right: 2rem;
+      }
+      
+      .navbar-custom .navbar-nav .nav-link {
+        color: #fff;
+        margin: 0 10px;
+        transition: color 0.3s, transform 0.2s;
+      }
+      
+      .navbar-custom .navbar-nav .nav-link:hover {
+        color: #ff6b00;
+        transform: translateY(0);
+      }
+      
+      .navbar-custom .navbar-nav .nav-link.active {
+        color: #ff6b00;
+        font-weight: bold;
+      }
+      
+      .navbar-custom .dropdown-menu {
+        background-color: #222;
+        border: none;
+      }
+      
+      .navbar-custom .dropdown-item {
+        color: #fff;
+      }
+      
+      .navbar-custom .dropdown-item:hover {
+        background-color: #333;
+        color: #ff6b00;
+      }
+      
+      .btn-sign-in {
+        background-color: transparent;
+        border: 1px solid #ffffff;
+        color: #ffffff;
+        transition: all 0.3s;
+      }
+      
+      .btn-sign-in:hover {
+        background-color: #ffffff;
+        color: #000;
+        transform: scale(1);
+      }
+      
+      /* Make sure the toggler icon is visible against black background */
+      .navbar-custom .navbar-toggler-icon {
+        background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%28255, 255, 255, 0.55%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+      }
+      
+      .navbar-custom .navbar-toggler {
+        border-color: rgba(255, 255, 255, 0.1);
+      }
+      
+      .center-nav {
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+      }
+      @media (max-width: 992px) {
+        .center-nav {
+          position: relative;
+          left: 0;
+          transform: none;
+        }
+      }
+      /* End Custom styles for the navbar */
+
+/* Page container */
+.page-container {
+    width: 100%;
+    max-width: 1000px;
+    margin: 60px auto;
+    padding: 0 15px;
+}
+
+/* Section styles */
+.section-title {
+    font-size: 1.8rem;
+    color: #ffffff;
+    padding-left: 10px;
+    border-left: 3px solid #ff6b00;
+    margin-bottom: 25px;
+}
+
+/* PC selection buttons */
+.pc-selection {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+.pc-select-btn {
+    flex: 1;
+    background-color: rgba(26, 26, 26, 0.7);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    padding: 15px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.pc-select-btn.active {
+    border-color: #ff6b00;
+    background-color: rgba(255, 107, 0, 0.1);
+}
+
+.pc-select-btn:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(255, 107, 0, 0.2);
+}
+
+.pc-type-title {
+    font-size: 1.3rem;
+    margin-bottom: 5px;
+    font-weight: 600;
+}
+
+.pc-type-price {
+    font-size: 1.1rem;
+    color: #ff6b00;
+}
+
+/* Pricing cards */
+.pricing-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+.pricing-card {
+    background-color: rgba(26, 26, 26, 0.7);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    padding: 20px;
+    text-align: center;
+    transition: all 0.3s ease;
+}
+
+.pricing-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(255, 107, 0, 0.2);
+    border-color: rgba(255, 107, 0, 0.3);
+}
+
+.pricing-time {
+    font-size: 1.3rem;
+    margin-bottom: 10px;
+}
+
+.pricing-price {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #ff6b00;
+    margin-bottom: 15px;
+}
+
+.top-up-btn {
+    background-color: #000000;
+    color: #ffffff;
+    border: 1px solid #ff6b00;
+    border-radius: 5px;
+    padding: 8px 15px;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.top-up-btn:hover {
+    background-color: #ff6b00;
+    color: #000000;
+    transform: scale(1.05);
+}
+
+/* PC type badge */
+.pc-type-badge {
+    display: inline-block;
+    padding: 5px 10px;
+    border-radius: 15px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+.standard-badge {
+    background-color: #4682B4;
+    color: white;
+}
+
+.premium-badge {
+    background-color: #FFD700;
+    color: black;
+}
+
+.best-value {
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    background-color: #ff6b00;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 15px;
+    font-size: 0.7rem;
+    font-weight: 600;
+    transform: rotate(15deg);
+}
+
+/* Promo banner */
+.promo-banner {
+    background: linear-gradient(45deg, #1a1a1a, #000000);
+    border: 1px solid rgba(255, 107, 0, 0.3);
+    border-radius: 10px;
+    padding: 15px;
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+.promo-title {
+    color: #ff6b00;
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+}
+
+.promo-text {
+    color: #ffffff;
+    margin-bottom: 0;
+}
+
+
+
+/* Responsive adjustments for page elements */
+@media (max-width: 768px) {
+    .pricing-container {
+        grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+        gap: 15px;
+    }
+    
+    .pricing-time {
+        font-size: 1.1rem;
+    }
+    
+    .pricing-price {
+        font-size: 1.5rem;
+    }
+    
+    .pc-selection {
+        flex-direction: column;
+        gap: 10px;
+    }
+}
+
+@media (max-width: 576px) {
+    .pricing-container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+</style>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark navbar-custom">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="Homepage.html">
+            <!-- Replace with your actual logo -->
+            <img src="img/eye-removebg-preview.png" alt="Logo" height="40">
+          </a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav center-nav">
+              <li class="nav-item">
+                <a class="nav-link" aria-current="page" href="Dashboard.html">Dashboard</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="Features.html">Features</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Contacts</a>
+              </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  Branches
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                    <li><a class="dropdown-item" href="branches/manila.html">Manila</a></li>
+                    <li><a class="dropdown-item" href="branches/quezon-city.html">Quezon City</a></li>
+                    <li><a class="dropdown-item" href="branches/makati.html">Makati</a></li>
+                    <li><a class="dropdown-item" href="branches/pasig.html">Pasig</a></li>
+                    <li><a class="dropdown-item" href="branches/alabang.html">Alabang</a></li>
+                    <li><hr class="dropdown-divider"></li>
+                    <li><a class="dropdown-item" href="branches/all-locations.html">All Locations</a></li>
+                </ul>
+              </li>
+            </ul>
+            <div class="ms-auto">
+                <a href="Registration.html" class="btn btn-sign-in">Sign In</a>
+            </div>
+          </div>
+        </div>
+      </nav>
+    <div class="page-container">
+        <h1 class="section-title">PC Top-up</h1>
+
+        <div class="promo-banner">
+            <h4 class="promo-title">WEEKEND SPECIAL OFFER!</h4>
+            <p class="promo-text">Get 10% extra time on all 3+ hour top-ups this weekend!</p>
+        </div>
+
+        <!-- PC Selection Buttons -->
+        <div class="pc-selection">
+            <div class="pc-select-btn" id="standardButton" onclick="showPcType('standard')">
+                <div class="pc-type-title">Standard PC</div>
+                <div class="pc-type-price">Starting at ₱20/hour</div>
+            </div>
+            <div class="pc-select-btn" id="premiumButton" onclick="showPcType('premium')">
+                <div class="pc-type-title">Premium PC</div>
+                <div class="pc-type-price">Starting at ₱30/hour</div>
+            </div>
+        </div>
+
+        <!-- PC Pricing Sections -->
+        <div id="standard-pricing" class="pc-pricing-section" style="display: none;">
+            <div class="pricing-container">
+                <div class="pricing-card">
+                    <span class="pc-type-badge standard-badge">Standard</span>
+                    <div class="pricing-time">1 Hour</div>
+                    <div class="pricing-price">₱20</div>
+                    <a href="#" class="top-up-btn">Top-up</a>
+                </div>
+                
+                <div class="pricing-card">
+                    <span class="pc-type-badge standard-badge">Standard</span>
+                    <div class="pricing-time">2 Hours</div>
+                    <div class="pricing-price">₱38</div>
+                    <a href="#" class="top-up-btn">Top-up</a>
+                </div>
+                
+                <div class="pricing-card position-relative">
+                    <span class="best-value">Best Value</span>
+                    <span class="pc-type-badge standard-badge">Standard</span>
+                    <div class="pricing-time">3 Hours</div>
+                    <div class="pricing-price">₱54</div>
+                    <a href="#" class="top-up-btn">Top-up</a>
+                </div>
+                
+                <div class="pricing-card">
+                    <span class="pc-type-badge standard-badge">Standard</span>
+                    <div class="pricing-time">5 Hours</div>
+                    <div class="pricing-price">₱85</div>
+                    <a href="#" class="top-up-btn">Top-up</a>
+                </div>
+                
+                <div class="pricing-card">
+                    <span class="pc-type-badge standard-badge">Standard</span>
+                    <div class="pricing-time">10 Hours</div>
+                    <div class="pricing-price">₱160</div>
+                    <a href="#" class="top-up-btn">Top-up</a>
+                </div>
+            </div>
+        </div>
+        
+        <div id="premium-pricing" class="pc-pricing-section" style="display: none;">
+            <div class="pricing-container">
+                <div class="pricing-card">
+                    <span class="pc-type-badge premium-badge">Premium</span>
+                    <div class="pricing-time">1 Hour</div>
+                    <div class="pricing-price">₱30</div>
+                    <a href="#" class="top-up-btn">Top-up</a>
+                </div>
+                
+                <div class="pricing-card">
+                    <span class="pc-type-badge premium-badge">Premium</span>
+                    <div class="pricing-time">2 Hours</div>
+                    <div class="pricing-price">₱57</div>
+                    <a href="#" class="top-up-btn">Top-up</a>
+                </div>
+                
+                <div class="pricing-card position-relative">
+                    <span class="best-value">Best Value</span>
+                    <span class="pc-type-badge premium-badge">Premium</span>
+                    <div class="pricing-time">3 Hours</div>
+                    <div class="pricing-price">₱81</div>
+                    <a href="#" class="top-up-btn">Top-up</a>
+                </div>
+                
+                <div class="pricing-card">
+                    <span class="pc-type-badge premium-badge">Premium</span>
+                    <div class="pricing-time">5 Hours</div>
+                    <div class="pricing-price">₱135</div>
+                    <a href="#" class="top-up-btn">Top-up</a>
+                </div>
+                
+                <div class="pricing-card">
+                    <span class="pc-type-badge premium-badge">Premium</span>
+                    <div class="pricing-time">10 Hours</div>
+                    <div class="pricing-price">₱250</div>
+                    <a href="#" class="top-up-btn">Top-up</a>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Additional Info Section -->
+        <div class="mt-5">
+            <h3 class="section-title">Additional Information</h3>
+            <div class="card" style="background-color: rgba(26, 26, 26, 0.7); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 10px; padding: 20px; margin-bottom: 20px;">
+                <ul style="list-style-type: none; padding-left: 0;">
+                    <li style="margin-bottom: 10px;">• Unused time will be saved in your account for future use</li>
+                    <li style="margin-bottom: 10px;">• Time can be used across any of our branches</li>
+                    <li style="margin-bottom: 10px;">• Get special discounts with monthly packages</li>
+                    <li style="margin-bottom: 10px;">• Free 15 minutes when you refer a friend</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript for PC type selection -->
+    <script>
+    // Function to show the selected PC type pricing and update active button
+function showPcType(type) {
+    // Hide all pricing sections
+    document.querySelectorAll('.pc-pricing-section').forEach(function(section) {
+        section.style.display = 'none';
+    });
+    
+    // Show selected pricing section
+    document.getElementById(type + '-pricing').style.display = 'block';
+    
+    // Update active button
+    document.querySelectorAll('.pc-select-btn').forEach(function(button) {
+        button.classList.remove('active');
+    });
+    document.getElementById(type + 'Button').classList.add('active');
+}
+
+// Get PC type from URL parameter
+function getInitialPcType() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const pcType = urlParams.get('pcType');
+    
+    // Return 'standard' if pcType parameter is 'standard', otherwise return 'premium'
+    return pcType === 'standard' ? 'standard' : 'premium';
+}
+
+// Initialize with the correct PC type when the page loads
+document.addEventListener('DOMContentLoaded', function() {
+    const initialPcType = getInitialPcType();
+    showPcType(initialPcType);
+});
+    </script>
+
+    <!-- Bootstrap JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.3/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>
